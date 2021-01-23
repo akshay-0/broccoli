@@ -1,0 +1,207 @@
+Skip to main content
+Search
+
+Sign in
+Docs  Azure Machine Learning  Python SDK  Reference  azureml-core  azureml.data  azureml.data.azure_storage_datastore  azureml.data.azure_storage_datastore.AzureBlobDatastore
+Version
+Search
+Search
+Python SDK overview
+Install or update
+Release notes
+Get support
+Tutorials & how-tos
+Sample Jupyter notebooks
+REST API reference
+CLI reference
+Overview
+Overview
+Overview
+Overview
+azureml.data.azure_storage_datastore.AbstractAzureStorageDatastore
+azureml.data.azure_storage_datastore.AzureBlobDatastore
+azureml.data.azure_storage_datastore.AzureFileDatastore
+azureml.data.constants
+azureml.data.datastore_client
+azureml.data.DataType
+azureml.data.FileDataset
+azureml.data.HDFSOutputDatasetConfig
+azureml.data.OutputFileDatasetConfig
+azureml.data.TabularDataset
+azureml.history
+AzureBlobDatastore class
+Definition
+Represents a datastore that saves connection information to Azure Blob storage.
+
+You should not work with this class directly. To create a datastore of this type, use the register_azure_blob_container(workspace, datastore_name, container_name, account_name, sas_token=None, account_key=None, protocol=None, endpoint=None, overwrite=False, create_if_not_exists=False, skip_validation=False, blob_cache_timeout=None, grant_workspace_access=False, subscription_id=None, resource_group=None) method of Datastore.
+
+Note: When using a datastore to access data, you must have permission to access that data, which depends on the credentials registered with the datastore.
+
+Python
+
+Copy
+AzureBlobDatastore(workspace, name, container_name, account_name, sas_token=None, account_key=None, protocol=None, endpoint=None, request_session=None, workspace_msi_has_access=False, subscription_id=None, resource_group=None)
+Inheritance
+AbstractDatastore
+AbstractAzureStorageDatastore
+AzureBlobDatastore
+Parameters
+workspace
+Workspace
+The workspace this datastore belongs to.
+
+name
+str
+The name of the datastore. It can only contain alphanumeric characters or - or _.
+
+container_name
+str
+The blob container name.
+
+account_name
+str
+The storage account name.
+
+sas_token
+str, optional
+The SAS token for accessing this container. Defaults to None.
+
+account_key
+str, optional
+The storage account key. Defaults to None.
+
+protocol
+str, optional
+The protocol to use to connect to the storage account. If None, defaults to https.
+
+endpoint
+str, optional
+The endpoint of the blob container. If None, defaults to core.windows.net.
+
+request_session
+requests.Session, optional
+the session object to use for http requests. Defaults to None.
+
+Methods
+METHODS
+download(target_path, prefix=None, overwrite=False, show_progress=True)	
+Download the data from the blob container to the local file system.
+
+upload(src_dir, target_path=None, overwrite=False, show_progress=True)	
+Upload the data from the local file system to blob container this data store points to.
+
+upload_files(files, relative_root=None, target_path=None, overwrite=False, show_progress=True)	
+Upload the data from the local file system to the blob container this datastore points to.
+
+download(target_path, prefix=None, overwrite=False, show_progress=True)
+Download the data from the blob container to the local file system.
+
+Python
+
+Copy
+download(target_path, prefix=None, overwrite=False, show_progress=True)
+Parameters
+target_path
+str
+The local directory to download the file to.
+
+prefix
+str, optional
+default value: None
+The path to the folder in the blob container to download. If set to None, will download everything in the blob. Defaults to None.
+
+overwrite
+bool, optional
+default value: False
+Indicates whether to overwrite existing files. Defaults to False.
+
+show_progress
+bool, optional
+default value: True
+Indicates whether to show the progress of the download in the console. Defaults to True.
+
+Returns
+The number of files successfully downloaded.
+
+Return type
+int
+upload(src_dir, target_path=None, overwrite=False, show_progress=True)
+Upload the data from the local file system to blob container this data store points to.
+
+Python
+
+Copy
+upload(src_dir, target_path=None, overwrite=False, show_progress=True)
+Parameters
+src_dir
+str
+The local directory to upload.
+
+target_path
+str
+default value: None
+The location in blob container to upload to. If None, then upload to root. Defaults to None.
+
+overwrite
+bool, optional
+default value: False
+Indicates whether to overwrite existing files. Defaults to False.
+
+show_progress
+bool, optional
+default value: True
+Indicates whether to show progress of the upload in the console. Defaults to True.
+
+Returns
+The DataReference instance for the target path uploaded.
+
+Return type
+DataReference
+upload_files(files, relative_root=None, target_path=None, overwrite=False, show_progress=True)
+Upload the data from the local file system to the blob container this datastore points to.
+
+Python
+
+Copy
+upload_files(files, relative_root=None, target_path=None, overwrite=False, show_progress=True)
+Parameters
+files
+list[str]
+A list of absolute paths of files to upload.
+
+relative_root
+str, optional
+default value: None
+The root used to determine the path of the files in the blob. For example, if we upload /path/to/file.txt, and we define base path to be /path, when file.txt is uploaded to the blob storage, it will have the path of /to/file.txt. If target_path is also given, then it will be used as the prefix for the derived path from above. The base path must be a common path of all of the files, otherwise an exception will be thrown. Defaults to None, which will find the common path.
+
+target_path
+str, optional
+default value: None
+The location in the blob container to upload the data to. Defaults to None, the root.
+
+overwrite
+bool, optional
+default value: False
+Indicates whether to overwrite existing files. Defaults to False.
+
+show_progress
+bool, optional
+default value: True
+Indicates whether to show progress of the upload in the console. Defaults to True.
+
+Returns
+The DataReference instance for the target path uploaded.
+
+Return type
+DataReference
+Feedback
+Submit and view feedback for
+
+ View all page feedback 
+Is this page helpful?
+ Yes  No
+In this article
+Definition
+Methods
+English (United States)
+Previous Version Docs Blog Contribute Privacy & Cookies Terms of Use Site Feedback Trademarks © Microsoft 2020
