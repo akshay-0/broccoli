@@ -1,21 +1,19 @@
 # broccoli
 
-This tool should be able to do everything that's needed to run a load test for AML. It creates workspaces, compute clusters, provisions all the resources required for load test, runs a distributed load test using a cluster of Azure Container Instances, and downloads stats and logs when test finishes.
+This tool should be able to do everything that's needed to run a load test for AML. It creates workspaces, compute clusters, provisions all the resources required for testing, runs a distributed load test using a cluster of Azure Container Instances, and downloads stats and logs when the test finishes.
 
 It's simple, really.
 
 In most cases, only file you'll need to edit is the `.config` file. This is where you specify your subscription id and resource group. It also allows you to tweak many other aspects of the load test. The file has generous comments about what each of the configs is used for and should be self-explanatory.
 
-When config file is ready, simply run `./broccoli.sh -adfkrsw` to provision all the resources and run distributed load test.
+When config file is ready, simply run `./broccoli.sh -adfkrsw` to provision all the resources and run a distributed load test.
 
 ## Quick start
 
 * Prerequisites
 
     - linux/wsl
-    - azureml sdk
     - azure cli
-    - locust
     - jq
 
 * Update config file
@@ -50,8 +48,17 @@ Run `./broccoli.sh -h` to see what each of the options does and adapt to your sc
 
 Sample usage:
 
-- `./broccoli.sh -adfkrsw` provision all the resources and run distributed test - useful for first run
-- `./broccoli.sh -fr` upload latest test files and run distributed test, assumes workspaces and other resources are already provisioned - useful for subsequent runs
+- `./broccoli.sh -adfkrsw`  
+
+Provision all the resources and run load test (useful for first run)
+
+- `./broccoli.sh -fr`  
+
+Upload latest test files and run load test, assumes workspaces and other resources are already provisioned (useful for subsequent runs)
+
+- `./broccoli.sh -w`  
+
+Create workspaces and computes but do not run any test
 
 ## Under the hood
 
